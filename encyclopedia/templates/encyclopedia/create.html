@@ -1,0 +1,25 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}Create New Entry{% endblock %}
+
+{% block body %}
+    <h1>Create a New Entry</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renders the form with paragraphs -->
+
+        <button type="submit">Save Entry</button>
+    </form>
+
+    {% if form.errors %}
+        <div style="color: red;">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
